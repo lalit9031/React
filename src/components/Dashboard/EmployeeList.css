@@ -1,0 +1,12 @@
+.employee-list {
+  list-style: none;
+  padding: 1rem;
+  background-color: rgb(228 228 228);
+  margin: 2rem auto;
+  width: 40rem;
+  max-width: 95%;
+}
+.employee-list__fallback {
+  color: white;
+  text-align: center;
+}

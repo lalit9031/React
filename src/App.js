@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import EmployeeList from "./components/Dashboard/EmployeeList";
+import { USERS } from "./mockData";
+import Login from "./components/Login/Login";
 
-function App() {
+const App = () => {
+  const [users] = useState(USERS["user"]);
+  const [isLogged, setLogin] = useState(false);
+
+  if (!isLogged) {
+    return <Login onLogin={setLogin} />;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <EmployeeList items={users} />
     </div>
   );
-}
+};
 
 export default App;
