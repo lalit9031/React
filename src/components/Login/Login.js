@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 
+import { loggedIn } from "../../store/actions";
 import { credential } from "../../mockData";
 import "./Login.css";
 
 const Login = (props) => {
+  const { loggedIn } = props;
   const [isError, setError] = useState(false);
   const [username, setUsername] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
@@ -22,15 +25,15 @@ const Login = (props) => {
       username: username,
       password: enteredPassword,
     };
-    console.log("submit data->", loginData);
-    console.log("credential data->", credential);
+
     if (
       loginData.username !== credential.username ||
       loginData.password !== credential.password
     ) {
       setError(true);
     } else {
-      props.onLogin(loginData);
+      setError(false);
+      loggedIn(loginData);
     }
   };
 
@@ -66,4 +69,9 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+const mapStateToProps = (state) => {
+  const { isLoggedIn, isError } = state;
+  return { isLoggedIn, isError };
+};
+
+export default connect(mapStateToProps, { loggedIn })(Login);
